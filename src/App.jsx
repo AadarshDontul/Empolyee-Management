@@ -4,6 +4,7 @@ import EmployeeDashboard from './components/Dashboard/EmployeeDashboard'
 import AdminDashboard from './components/Dashboard/AdminDashboard'
 import { setLocalStorage } from './utils/localStorage'
 import { AuthContext } from './context/AuthProvider'
+import { data } from 'autoprefixer';
 
 function App(){
   const [user, setUser] = useState(null)
@@ -11,16 +12,19 @@ function App(){
   const authData = useContext(AuthContext)
   console.log(authData)
 
-  /*useEffect(() => {
+  useEffect(() => {
     const loggedInUser = localStorage.getItem('loggedIn')
     if(loggedInUser){
-      setUser(JSON.parse(loggedInUser).role)
+      const userData = JSON.parse(loggedInUser)
+      setUser(userData.role)
+      setLoggedInUserData(userData.data)
     }
-  }, [authData])*/
+  },[])
+  
   setLocalStorage()
   
   const handleLogin = (email, password) => {
-    if (email === 'admin@ex.com' && password === '123') {
+    if (email === 'admin@example.com' && password === '123') {
       setUser('admin');
       localStorage.setItem('loggedIn', JSON.stringify({ role: 'admin' }));
     } else if (authData) {
@@ -29,7 +33,7 @@ function App(){
       );
       if (employee) {
         setUser('employee');
-        localStorage.setItem('loggedIn', JSON.stringify({ role: 'employee' }));
+        localStorage.setItem('loggedIn', JSON.stringify({ role: 'employee',data:employee}));
         setLoggedInUserData(employee); // Ensure this is set correctly
       } else {
         alert('Invalid credentials');

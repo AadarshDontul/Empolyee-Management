@@ -11,21 +11,21 @@ function App(){
   const authData = useContext(AuthContext)
   console.log(authData)
 
-  useEffect(() => {
+  /*useEffect(() => {
     const loggedInUser = localStorage.getItem('loggedIn')
     if(loggedInUser){
       setUser(JSON.parse(loggedInUser).role)
     }
-  }, [authData])
+  }, [authData])*/
+  setLocalStorage()
   
-
   const handleLogin = (email, password) => {
     if (email === 'admin@ex.com' && password === '123') {
       setUser('admin');
       localStorage.setItem('loggedIn', JSON.stringify({ role: 'admin' }));
     } else if (authData) {
       const employee = authData.employeeData.find(
-        (employee) => employee.email === email && employee.password === password
+        (employeeCurr) => employeeCurr.email === email && employeeCurr.password === password
       );
       if (employee) {
         setUser('employee');

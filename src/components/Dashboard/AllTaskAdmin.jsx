@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthProvider';
 
 const AllTaskAdmin = () => {
-  const authData = useContext(AuthContext);
+  const [userData,setUserData] = useContext(AuthContext);
 
   return (
     <div className='bg-[#1c1c1c] p-5 rounded mt-5 h-60'>
@@ -17,7 +17,7 @@ const AllTaskAdmin = () => {
 
       {/* Data Section */}
       <div className='h-[80%] overflow-auto'>
-        {authData?.employeeData?.map((employee, index) => (
+        {userData.map((employee, index) => (
           <div
             key={index}
             className='flex justify-between bg-emerald-600  mb-2 py-2 px-4 rounded'

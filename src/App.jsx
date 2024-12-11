@@ -9,7 +9,7 @@ import { data } from 'autoprefixer';
 function App(){
   const [user, setUser] = useState(null)
   const [loggedInUserData, setLoggedInUserData] = useState(null)
-  const authData = useContext(AuthContext)
+  const [userData,setUserData] = useContext(AuthContext)
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('loggedIn')
@@ -19,15 +19,14 @@ function App(){
       setLoggedInUserData(userData.data)
     }
   },[])
-  
-  setLocalStorage()
+
   
   const handleLogin = (email, password) => {
     if (email === 'admin@example.com' && password === '123') {
       setUser('admin');
       localStorage.setItem('loggedIn', JSON.stringify({ role: 'admin' }));
-    } else if (authData) {
-      const employee = authData.employeeData.find(
+    } else if (userData) {
+      const employee = userData.find(
         (employeeCurr) => employeeCurr.email === email && employeeCurr.password === password
       );
       if (employee) {
